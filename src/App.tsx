@@ -1,8 +1,23 @@
+import { useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+const draw = (canvasElement: any) => {
+  const ctx = canvasElement.getContext('2d')
+
+  ctx.beginPath()
+  ctx.arc(100, 100, 20, 0, 2*Math.PI)
+  ctx.stroke()
+}
+
 function App() {
+  const canvasRef = useRef(null)
+
+  if (canvasRef.current) {
+    draw(canvasRef.current)
+  }
+
 
   return (
     <>
@@ -14,19 +29,8 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <canvas id="canvas"></canvas>
-      <div className="card">
-        <button onClick={() => {}}>
-          count is
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h3>CPhysicsEngine</h3>
+      <canvas id="canvas" width={640} height={480} ref={canvasRef}></canvas>
     </>
   )
 }
